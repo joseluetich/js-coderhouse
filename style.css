@@ -1,0 +1,169 @@
+* {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+  font-family: "Noto Sans JP", sans-serif;
+}
+
+/*Barra de navegacion*/
+#navBar {
+  background-color: black;
+  overflow: hidden;
+  padding: 10px 0px;
+  position: fixed;
+  z-index: 100;
+  width: 100%;
+}
+
+li {
+  display: inline;
+  float: left;
+}
+
+#brand {
+  margin: 0 30px;
+}
+
+nav > li > a > p {
+  color: #ba68c8;
+  font-size: 25px;
+  /*display: inline;*/
+}
+
+nav > li > a > p > img {
+  width: 30px;
+  float: left;
+  margin: 0;
+  padding: 3px 10px;
+}
+
+nav > li > a:hover {
+  color: #ba68c8;
+}
+
+nav > ul > #nav-cart > a {
+  color: #ba68c8;
+  /*display: inline;*/
+}
+
+nav > ul > #nav-cart > a > p {
+  display: inline;
+}
+
+nav > ul > #nav-cart > a > p > img {
+  width: 30px;
+  margin: 0 0 0 10px;
+  float: right;
+}
+
+a {
+  display: block;
+  padding: 12px 16px;
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 6px 20px;
+  overflow: hidden;
+  float: right;
+}
+
+li a:hover {
+  background-color: #ffffff;
+  color: black;
+  font-weight: 500px;
+}
+
+/*home*/
+#home {
+  padding-top: 120px;
+}
+
+#home img {
+  width: 550px;
+  display: block;
+}
+
+#home h1 {
+  text-align: center;
+  font-size: 45px;
+  margin: 30px;
+}
+
+#home p {
+  text-align: center;
+  font-size: 30px;
+  margin: 30px;
+}
+
+/*secciones*/
+section {
+  padding-top: 80px;
+}
+
+.title-section {
+  background-color: black;
+  color: white;
+  padding: 15px 40px;
+  font-size: 35px;
+}
+
+section > p {
+  text-align: center;
+  font-size: 25px;
+  margin: 30px 250px 0 250px;
+}
+
+section img {
+  width: 550px;
+  display: block;
+  margin: auto;
+}
+
+/*productos*/
+table {
+  width: 100%;
+}
+
+tbody img {
+  max-width: 350px;
+}
+
+form {
+  text-align: center;
+  margin: 30px;
+}
+
+form p {
+  font-size: 25px;
+}
+
+.product-name {
+  font-weight: bold;
+}
+
+form button {
+  font-size: 25px;
+  margin: 20px;
+  background-color: #ba68c8;
+  font-weight: 500;
+  border: none;
+  color: white;
+  border-radius: 8px;
+  padding: 5px 50px;
+}
+
+/*contact*/
+#contact-img {
+  padding: 0;
+}
+
+/*carrito*/
+
+#cart > h1 {
+  background-color: #ba68c8;
+}
