@@ -6,13 +6,13 @@
 }
 
 /*Barra de navegacion*/
-#navBar {
+nav {
   background-color: black;
-  overflow: hidden;
-  padding: 10px 0px;
+  padding: 10px 15px;
   position: fixed;
   z-index: 100;
   width: 100%;
+  /*overflow: hidden;*/
 }
 
 li {
@@ -21,36 +21,28 @@ li {
 }
 
 #brand {
-  margin: 0 30px;
-}
-
-nav > li > a > p {
   color: #ba68c8;
   font-size: 25px;
   /*display: inline;*/
 }
 
-nav > li > a > p > img {
+#brand > img {
   width: 30px;
   float: left;
-  margin: 0;
   padding: 3px 10px;
+  /*margin: 0;*/
 }
 
 nav > li > a:hover {
   color: #ba68c8;
 }
 
-nav > ul > #nav-cart > a {
+#nav-cart > a {
   color: #ba68c8;
   /*display: inline;*/
 }
 
-nav > ul > #nav-cart > a > p {
-  display: inline;
-}
-
-nav > ul > #nav-cart > a > p > img {
+#cart-img {
   width: 30px;
   margin: 0 0 0 10px;
   float: right;
@@ -66,25 +58,25 @@ a {
 
 ul {
   list-style-type: none;
-  margin: 0;
   padding: 6px 20px;
-  overflow: hidden;
   float: right;
+  /*margin: 0;*/
+  /*overflow: hidden;*/
 }
 
 li a:hover {
   background-color: #ffffff;
   color: black;
-  font-weight: 500px;
+  font-weight: 600;
 }
 
 /*home*/
 #home {
-  padding-top: 120px;
+  /*padding-top: 120px;*/
 }
 
 #home img {
-  width: 550px;
+  width: 30%;
   display: block;
 }
 
@@ -119,7 +111,7 @@ section > p {
 }
 
 section img {
-  width: 550px;
+  width: 30%;
   display: block;
   margin: auto;
 }
