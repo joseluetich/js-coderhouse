@@ -1,8 +1,9 @@
 class Product {
-  constructor(id, name, price, type) {
+  constructor(id, name, price, image, type) {
     this._id = id;
     this._name = name;
     this._price = price;
+    this._image = image;
     this._quantity = 0;
     this._type = type;
   }
@@ -26,6 +27,14 @@ class Product {
     this._price = price;
   }
 
+  get image() {
+    return this._image;
+  }
+
+  set image(image) {
+    this._image = image;
+  }
+
   get quantity() {
     return this._quantity;
   }
@@ -41,4 +50,5 @@ class Product {
   set type(type) {
     this._type = type;
   }
+
 }

@@ -12,34 +12,30 @@
       href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500&display=swap"
       rel="stylesheet"
     />
-    <script src="/js/Product.js"></script>
-    <!--<script src="/js/app.js"></script>-->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
     <title>Bebidas Zeppelin</title>
   </head>
   <body>
-    <nav>
+    <nav class="topnav">
       <li>
         <a href="#home">
-          <p id="brand">
-            <img src="/images/zeppelin.svg" />
-            ZEPPELIN
-          </p>
+          <p id="brand"><img src="/images/zeppelin.svg" />ZEPPELIN</p>
         </a>
       </li>
       <ul>
         <li><a href="#us">NOSOTROS</a></li>
-        <li><a href="#beers">CERVEZAS</a></li>
-        <li><a href="#wines">VINOS</a></li>
-        <li><a href="#sparklingWines">ESPUMANTES</a></li>
-        <li><a href="#distillates">DESTILADOS</a></li>
-        <li><a href="#combos">COMBOS</a></li>
+        <li><a href="#beer">CERVEZAS</a></li>
+        <li><a href="#wine">VINOS</a></li>
+        <li><a href="#sparkling-wine">ESPUMANTES</a></li>
+        <li><a href="#distillate">DESTILADOS</a></li>
+        <li><a href="#combo">COMBOS</a></li>
         <li><a href="#contact">CONTACTO</a></li>
         <li id="nav-cart">
           <a href="#cart">
-            <p>
-              CARRITO
-              <img id="cart-img" src="/images/cart.svg" />
-            </p>
+            <p>CARRITO<img id="cart-img" src="/images/cart.svg" /></p>
           </a>
         </li>
       </ul>
@@ -72,550 +68,37 @@
       </p>
     </section>
 
-    <section id="beers">
+    <section id="beer">
       <h1 class="title-section">Cervezas</h1>
       <div>
-        <table>
-          <tbody>
-            <tr>
-              <td>
-                <div>
-                  <form>
-                    <div>
-                      <img src="images/beers/grolsch.jpg" />
-                    </div>
-                    <div>
-                      <p class="product-name">Grolsch 473ml x6</p>
-                      <p>$874,00</p>
-                    </div>
-                    <div><button>COMPRAR</button></div>
-                  </form>
-                </div>
-              </td>
-              <td>
-                <div>
-                  <form>
-                    <div>
-                      <img src="images/beers/heineken.jpg" />
-                    </div>
-                    <div>
-                      <p class="product-name">Heineken 473ml x6</p>
-                      <p>$817,00</p>
-                    </div>
-                    <div><button>COMPRAR</button></div>
-                  </form>
-                </div>
-              </td>
-              <td>
-                <div>
-                  <form>
-                    <div>
-                      <img src="images/beers/andesRubia.jpg" />
-                    </div>
-                    <div>
-                      <p class="product-name">Andes Lager 473ml x6</p>
-                      <p>$617,50</p>
-                    </div>
-                    <div><button>COMPRAR</button></div>
-                  </form>
-                </div>
-              </td>
-              <td>
-                <div>
-                  <form>
-                    <div>
-                      <img src="images/beers/andesRoja.jpg" />
-                    </div>
-                    <div>
-                      <p class="product-name">Andes Roja 473ml x6</p>
-                      <p>$693,50</p>
-                    </div>
-                    <div><button>COMPRAR</button></div>
-                  </form>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <div>
-                  <form>
-                    <div>
-                      <img src="images/beers/patagonia.jpg" />
-                    </div>
-                    <div>
-                      <p class="product-name">Patagonia 24.7 473ml x6</p>
-                      <p>$817,00</p>
-                    </div>
-                    <div><button>COMPRAR</button></div>
-                  </form>
-                </div>
-              </td>
-              <td>
-                <div>
-                  <form>
-                    <div>
-                      <img src="images/beers/imperialGolden.jpg" />
-                    </div>
-                    <div>
-                      <p class="product-name">Imperial Golden 473ml x6</p>
-                      <p>$684,00</p>
-                    </div>
-                    <div><button>COMPRAR</button></div>
-                  </form>
-                </div>
-              </td>
-              <td>
-                <div>
-                  <form>
-                    <div>
-                      <img src="images/beers/imperialLager.jpg" />
-                    </div>
-                    <div>
-                      <p class="product-name">Imperial Lager 473ml x6</p>
-                      <p>$703,00</p>
-                    </div>
-                    <div><button>COMPRAR</button></div>
-                  </form>
-                </div>
-              </td>
-              <td>
-                <div>
-                  <form>
-                    <div>
-                      <img src="images/beers/schneider.jpg" />
-                    </div>
-                    <div>
-                      <p class="product-name">Schneider 473ml x6</p>
-                      <p>$560,50</p>
-                    </div>
-                    <div><button>COMPRAR</button></div>
-                  </form>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        <table id="table-beer"></table>
       </div>
     </section>
 
-    <section id="wines">
+    <section id="wine">
       <h1 class="title-section">Vinos</h1>
       <div>
-        <table>
-          <tbody>
-            <tr>
-              <td>
-                <div>
-                  <form>
-                    <div>
-                      <img src="images/wines/norton.jpg" />
-                    </div>
-                    <div>
-                      <p class="product-name">Norton Cosecha Tardía 750ml</p>
-                      <p>$290,00</p>
-                    </div>
-                    <div><button>COMPRAR</button></div>
-                  </form>
-                </div>
-              </td>
-              <td>
-                <div>
-                  <form>
-                    <div>
-                      <img src="images/wines/portillo1.jpg" />
-                    </div>
-                    <div>
-                      <p class="product-name">
-                        Portillo Cabernet Suavignon 750ml
-                      </p>
-                      <p>$290,00</p>
-                    </div>
-                    <div><button>COMPRAR</button></div>
-                  </form>
-                </div>
-              </td>
-              <td>
-                <div>
-                  <form>
-                    <div>
-                      <img src="images/wines/norton2.jpg" />
-                    </div>
-                    <div>
-                      <p class="product-name">
-                        Norton Cosecha Tardía Rosado 750ml
-                      </p>
-                      <p>$240,00</p>
-                    </div>
-                    <div><button>COMPRAR</button></div>
-                  </form>
-                </div>
-              </td>
-              <td>
-                <div>
-                  <form>
-                    <div>
-                      <img src="images/wines/portillo2.jpg" />
-                    </div>
-                    <div>
-                      <p class="product-name">Portillo Chardonnay 750ml</p>
-                      <p>$290,00</p>
-                    </div>
-                    <div><button>COMPRAR</button></div>
-                  </form>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <div>
-                  <form>
-                    <div>
-                      <img src="images/wines/luigibosca.jpg" />
-                    </div>
-                    <div>
-                      <p class="product-name">Luigi Bosca de Sangre 750ml</p>
-                      <p>$1.440,00</p>
-                    </div>
-                    <div><button>COMPRAR</button></div>
-                  </form>
-                </div>
-              </td>
-              <td>
-                <div>
-                  <form>
-                    <div>
-                      <img src="images/wines/salentein.jpg" />
-                    </div>
-                    <div>
-                      <p class="product-name">Salentein Reserve Rose 750ml</p>
-                      <p>$670,00</p>
-                    </div>
-                    <div><button>COMPRAR</button></div>
-                  </form>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        <table id="table-wine"></table>
       </div>
     </section>
-    <section id="sparklingWines">
+    <section id="sparkling-wine">
       <h1 class="title-section">Espumantes</h1>
       <div>
-        <table>
-          <tbody>
-            <tr>
-              <td>
-                <div>
-                  <form>
-                    <div>
-                      <img src="images/sparklingWine/baronb.jpg" />
-                    </div>
-                    <div>
-                      <p class="product-name">Baron B Extra Brut 750ml</p>
-                      <p>$1.564,00</p>
-                    </div>
-                    <div><button>COMPRAR</button></div>
-                  </form>
-                </div>
-              </td>
-              <td>
-                <div>
-                  <form>
-                    <div>
-                      <img src="images/sparklingWine/nieto.jpg" />
-                    </div>
-                    <div>
-                      <p class="product-name">
-                        Nieto Senetiner Brut Nature 750ml
-                      </p>
-                      <p>$612,00</p>
-                    </div>
-                    <div><button>COMPRAR</button></div>
-                  </form>
-                </div>
-              </td>
-              <td>
-                <div>
-                  <form>
-                    <div>
-                      <img src="images/sparklingWine/salentein.jpg" />
-                    </div>
-                    <div>
-                      <p class="product-name">Salentein Extra Brut 750ml</p>
-                      <p>$510,00</p>
-                    </div>
-                    <div><button>COMPRAR</button></div>
-                  </form>
-                </div>
-              </td>
-              <td>
-                <div>
-                  <form>
-                    <div>
-                      <img src="images/sparklingWine/sidra.jpg" />
-                    </div>
-                    <div>
-                      <p class="product-name">Sidra 1888 750ml</p>
-                      <p>$390,00</p>
-                    </div>
-                    <div><button>COMPRAR</button></div>
-                  </form>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <div>
-                  <form>
-                    <div>
-                      <img src="images/sparklingWine/salenteinBlanc.jpg" />
-                    </div>
-                    <div>
-                      <p class="product-name">
-                        Salentein Blanc De Blancs 750ml
-                      </p>
-                      <p>$560,00</p>
-                    </div>
-                    <div><button>COMPRAR</button></div>
-                  </form>
-                </div>
-              </td>
-              <td>
-                <div>
-                  <form>
-                    <div>
-                      <img src="images/sparklingWine/veuve.jpg" />
-                    </div>
-                    <div>
-                      <p class="product-name">
-                        Veuve Clicquot Rose Couche 750ml
-                      </p>
-                      <p>$6.540,00</p>
-                    </div>
-                    <div><button>COMPRAR</button></div>
-                  </form>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        <table id="table-sparkling-wine"></table>
       </div>
     </section>
 
-    <section id="distillates">
+    <section id="distillate">
       <h1 class="title-section">Destilados</h1>
       <div>
-        <table>
-          <tbody>
-            <tr>
-              <td>
-                <div>
-                  <form>
-                    <div>
-                      <img src="images/distillates/absolut.jpg" />
-                    </div>
-                    <div>
-                      <p class="product-name">Absolut Peppar 750ml</p>
-                      <p>$2.060,00</p>
-                    </div>
-                    <div><button>COMPRAR</button></div>
-                  </form>
-                </div>
-              </td>
-              <td>
-                <div>
-                  <form>
-                    <div>
-                      <img src="images/distillates/fernet.jpg" />
-                    </div>
-                    <div>
-                      <p class="product-name">Fernet Branca 750ml</p>
-                      <p>$578,00</p>
-                    </div>
-                    <div><button>COMPRAR</button></div>
-                  </form>
-                </div>
-              </td>
-              <td>
-                <div>
-                  <form>
-                    <div>
-                      <img src="images/distillates/jack.jpg" />
-                    </div>
-                    <div>
-                      <p class="product-name">Jack Daniels Honey 750ml</p>
-                      <p>$4.726,00</p>
-                    </div>
-                    <div><button>COMPRAR</button></div>
-                  </form>
-                </div>
-              </td>
-              <td>
-                <div>
-                  <form>
-                    <div>
-                      <img src="images/distillates/jager.jpg" />
-                    </div>
-                    <div>
-                      <p class="product-name">Jagermeister Scharf 700ml</p>
-                      <p>$3.130,00</p>
-                    </div>
-                    <div><button>COMPRAR</button></div>
-                  </form>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <div>
-                  <form>
-                    <div>
-                      <img src="images/distillates/johnnie.jpg" />
-                    </div>
-                    <div>
-                      <p class="product-name">
-                        Johnnie Walker Black Label 750ml
-                      </p>
-                      <p>$3.111,00</p>
-                    </div>
-                    <div><button>COMPRAR</button></div>
-                  </form>
-                </div>
-              </td>
-              <td>
-                <div>
-                  <form>
-                    <div>
-                      <img src="images/distillates/restinga.jpg" />
-                    </div>
-                    <div>
-                      <p class="product-name">
-                        Gin Restinga Edición Especial 700ml
-                      </p>
-                      <p>$1.700,00</p>
-                    </div>
-                    <div><button>COMPRAR</button></div>
-                  </form>
-                </div>
-              </td>
-              <td>
-                <div>
-                  <form>
-                    <div>
-                      <img src="images/distillates/sernova.jpg" />
-                    </div>
-                    <div>
-                      <p class="product-name">
-                        Vodka Sernova Fresh Citrus 750ml
-                      </p>
-                      <p>$490,00</p>
-                    </div>
-                    <div><button>COMPRAR</button></div>
-                  </form>
-                </div>
-              </td>
-              <td>
-                <div>
-                  <form>
-                    <div>
-                      <img src="images/distillates/skyy.jpg" />
-                    </div>
-                    <div>
-                      <p class="product-name">Skyy Coconut 750ml</p>
-                      <p>$700,00</p>
-                    </div>
-                    <div><button>COMPRAR</button></div>
-                  </form>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        <table id="table-distillate"></table>
       </div>
     </section>
 
-    <section id="combos">
+    <section id="combo">
       <h1 class="title-section">Combos</h1>
       <div>
-        <table>
-          <tbody>
-            <tr>
-              <td>
-                <div>
-                  <form>
-                    <div>
-                      <img src="images/combos/combo1.jpg" />
-                    </div>
-                    <div>
-                      <p class="product-name">Combo Fernet-Cola</p>
-                      <p>$833,00</p>
-                    </div>
-                    <div><button>COMPRAR</button></div>
-                  </form>
-                </div>
-              </td>
-              <td>
-                <div>
-                  <form>
-                    <div>
-                      <img src="images/combos/combo2.jpg" />
-                    </div>
-                    <div>
-                      <p class="product-name">Combo Jager-Cola</p>
-                      <p>$4.167,00</p>
-                    </div>
-                    <div><button>COMPRAR</button></div>
-                  </form>
-                </div>
-              </td>
-              <td>
-                <div>
-                  <form>
-                    <div>
-                      <img src="images/combos/combo3.jpg" />
-                    </div>
-                    <div>
-                      <p class="product-name">Combo Mandarin</p>
-                      <p>$2.185,00</p>
-                    </div>
-                    <div><button>COMPRAR</button></div>
-                  </form>
-                </div>
-              </td>
-              <td>
-                <div>
-                  <form>
-                    <div>
-                      <img src="images/combos/combo4.jpg" />
-                    </div>
-                    <div>
-                      <p class="product-name">Combo Red Lime</p>
-                      <p>$2.508,00</p>
-                    </div>
-                    <div><button>COMPRAR</button></div>
-                  </form>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <div>
-                  <form>
-                    <div>
-                      <img src="images/combos/combo5.jpg" />
-                    </div>
-                    <div>
-                      <p class="product-name">Combo Vainilla Bull</p>
-                      <p>$2.508,00</p>
-                    </div>
-                    <div><button>COMPRAR</button></div>
-                  </form>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        <table id="table-combo"></table>
       </div>
     </section>
 
@@ -628,5 +111,9 @@
     </section>
 
     <section id="cart"><h1 class="title-section">Carrito</h1></section>
+
+    <script src="/js/Product.js"></script>
+    <script src="/js/inicialization.js"></script>
+    <script src="/js/app.js"></script>
   </body>
 </html>
