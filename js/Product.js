@@ -1,12 +1,13 @@
 class Product {
-  constructor(id, name, price, image, type) {
-    this._id = id;
-    this._name = name;
-    this._price = price;
-    this._image = image;
+  constructor(data) {
+    this._id = parseInt(data.id);
+    this._name = data.name;
+    this._price = parseFloat(data.price);
+    this._image = data.image;
     this._quantity = 0;
-    this._type = type;
+    this._type = data.type;
   }
+
   get id() {
     return this._id;
   }
