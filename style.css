@@ -5,6 +5,9 @@
 }
 
 /*Barra de navegacion*/
+.navbar {
+  width: 100%;
+}
 .navbar li {
   list-style: none;
   font-weight: 500;
@@ -33,21 +36,21 @@
 }
 
 .content > img {
-  max-width: 25vw;
+  max-width: 25rem;
   display: block;
   margin: auto;
 }
 
 .content > h1 {
-  font-size: 3vw;
+  font-size: 3rem;
   text-align: center;
 }
 
 section > h2 {
   background-color: #343a40;
   color: white;
-  font-size: 2vw;
-  padding: 1vw;
+  font-size: 2rem;
+  padding: 1rem;
 }
 
 #cart > h2 {
@@ -56,29 +59,35 @@ section > h2 {
 
 /*Textos descriptivos*/
 .description-text {
-  margin: 3vw 10vw 0 10vw;
+  margin: 3rem 10rem 0 10rem;
 }
 
 .description-text > p {
-  font-size: 1.8vw;
+  font-size: 1.5rem;
   text-align: center;
 }
 
 /*Tablas*/
 table {
-  width: 100%;
+  margin: auto;
 }
 
 #product-card {
+  width: 300px !important;
   display: block;
-  border: none;
   text-align: center;
   align-items: center;
-  font-size: 1.5vw;
+  font-size: 1.2rem;
+  background: #fff 0 0 no-repeat padding-box;
+  box-shadow: 0 5px 16px hsl(0deg 0% 60% / 55%);
+  margin: 1rem;
+  border-radius: 13px;
+  opacity: 1;
 }
 
 #product-card h5 {
-  font-size: 1.5vw;
+  font-size: 1.2rem;
+  height: 50px;
 }
 
 #product-card img {
@@ -86,13 +95,19 @@ table {
   max-width: 18vw;
 }
 
+#product-card p {
+  display: inline-block;
+  margin-right: 1.5rem;
+}
+
 #product-card a {
   background-color: #ba68c8;
   border: none;
   padding: 5px 20px;
-  font-size: 1.5vw;
-  text-transform: uppercase;
+  font-size: 1rem !important;
   font-weight: 500;
+  display: inline-block;
+  margin-left: 1.5rem;
 }
 
 .buy-button::after:hover {
@@ -102,7 +117,7 @@ table {
 /*carrrito*/
 #cart-table {
   margin: 0 2%;
-  font-size: 1.5vw;
+  font-size: 1.5rem;
   max-width: 96%;
 }
 
@@ -112,4 +127,28 @@ table {
 
 .total-row {
   background-color: #f1e1f4;
+}
+
+/*botones*/
+.btn-confirm {
+  background-color: #ba68c8 !important;
+  margin: 2%;
+  float: right;
+}
+
+.btn-primary:focus {
+  box-shadow: 0 0 0 0.3rem #f1e1f4 !important;
+}
+
+.btn-cancel {
+  background-color: rgb(163, 163, 163) !important;
+  margin: 2% 0;
+  float: right;
+}
+
+.btn {
+  border: none !important;
+  padding: 5px 20px !important;
+  font-size: 1rem !important;
+  font-weight: 500 !important;
 }
