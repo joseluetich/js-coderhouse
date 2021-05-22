@@ -1,10 +1,13 @@
 let dataCart = [];
+//Obtengo los productos del localstorage
 dataCart = JSON.parse(localStorage.getItem("cart"));
 let cart = [];
 
 function getStorageData() {
   if (dataCart)
     for (const prod of dataCart) {
+      /*Como en el constructor this.quantity = 0, hay que guardar
+      el valor de la cantidad antes de sobreescribirlo*/
       let productQuantity = prod.quantity;
       let newProduct = new Product(prod);
       newProduct._quantity = productQuantity;
@@ -217,5 +220,4 @@ function showTotalRow(totalPrice) {
 function clear() {
   location.reload();
   localStorage.clear();
-  //getStorageData();
 }
