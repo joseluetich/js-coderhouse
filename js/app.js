@@ -4,7 +4,7 @@ dataCart = JSON.parse(localStorage.getItem("cart"));
 let cart = [];
 
 function getStorageData() {
-  if (dataCart)
+  if (dataCart) {
     for (const prod of dataCart) {
       /*Como en el constructor this.quantity = 0, hay que guardar
       el valor de la cantidad antes de sobreescribirlo*/
@@ -13,6 +13,8 @@ function getStorageData() {
       newProduct._quantity = productQuantity;
       cart.push(newProduct);
     }
+  }
+  validateButtonsState(dataCart);
   showCart(cart);
 }
 
@@ -20,8 +22,7 @@ function setHomeText() {
   let paragraph1 = "Elegi la bebida y nosotros te la llevamos!";
   let paragraph2 =
     "Cerveza, vinos y licores a la puerta de tu casa, en el menor tiempo.";
-  let homeText = document.getElementById("home-text");
-  homeText.innerHTML = `<p>${paragraph1}</p><p>${paragraph2}</p>`;
+  $("#home-text").append(`<p>${paragraph1}</p><p>${paragraph2}</p>`);
 }
 
 function setUsText() {
@@ -31,22 +32,21 @@ function setUsText() {
     " Nos enfocamos en un servicio personalizado, facilidad de compra y entregas inmediatas.";
   let paragraph3 =
     "Nuestro centro se ubica en la ciudad de Santa Fe, pero contamos con diferentes puntos de distribución que nos permiten entregar bebidas en todos los puntos del país.";
-  let usText = document.getElementById("us-text");
-  usText.innerHTML = `<p>${paragraph1}</p><p>${paragraph2}</p><p>${paragraph3}</p>`;
+  $("#us-text").append(
+    `<p>${paragraph1}</p><p>${paragraph2}</p><p>${paragraph3}</p>`
+  );
 }
 
 function setContactText() {
   let phone = "+54 342 6859144";
   let email = "bebidaszeppelin@gmail.com";
   let address = "San Martin 2817, 3000, Santa Fe";
-  let contactInfo = document.getElementById("contact-info");
-  contactInfo.innerHTML = `<p><b>Whats App:</b> ${phone}</p>
+  $("#contact-info").append(`<p><b>Whats App:</b> ${phone}</p>
   <p><b>Email:</b> ${email}</p>
-  <p><b>Dirección:</b> ${address}</p>`;
+  <p><b>Dirección:</b> ${address}</p>`);
 }
 
 function createTable(data, type) {
-  let table = document.getElementById(`table-${type}`);
   let tableBody = document.createElement("tbody");
 
   //Creo un componente para cada producto de la categoria "type"
@@ -58,7 +58,7 @@ function createTable(data, type) {
                     <div class="card-body">
                       <h5 class="card-title">${product.name}</h5>
                       <div id="buy-container">
-                        <p class="card-text">$${product.price}</p>
+                        <p class="card-text">$ ${product.price}</p>
                         <a id=${product.id} href="#" class="btn btn-primary buy-button">Comprar</a>
                       </div>
                     </div>
@@ -81,11 +81,12 @@ function createTable(data, type) {
   else {
     orderTable(tableBody, content, 4);
   }
-  table.appendChild(tableBody);
+
+  $(`#table-${type}`).append(tableBody);
 }
 
 function orderTable(tableBody, content, size) {
-  //Agrupo cuatro elementos por fila
+  //Agrupo 'size' elementos por fila
   let count = 0;
   let row = null;
   for (let i = 0; i < content.length; i++) {
@@ -119,6 +120,32 @@ function setEventListeners() {
   //Agrego event listener a boton cancelar
   let cancelButton = document.getElementById("cancel-button");
   cancelButton.addEventListener("click", clear);
+  //Agrego event listener a boton confirmar
+  let confirmButton = document.getElementById("confirm-button");
+  confirmButton.addEventListener("click", showForm);
+}
+
+function validateButtonsState(cart) {
+  let confirmButton = document.getElementById("confirm-button");
+  let cancelButton = document.getElementById("cancel-button");
+  if (cart == null || cart.length == 0) {
+    confirmButton.disabled = true;
+    cancelButton.disabled = true;
+    //Si no hay nada en el carrito pongo fila vacia
+    addEmptyRow();
+  } else {
+    confirmButton.disabled = false;
+    cancelButton.disabled = false;
+  }
+}
+
+function addEmptyRow() {
+  $("#cart-body").prepend(`<tr>
+  <td class="center">-</td>
+  <td class="center">-</td>
+  <td class="center">-</td>
+  <td class="center">-</td>
+</tr>`);
 }
 
 function buy(e) {
@@ -134,7 +161,6 @@ function buy(e) {
       existProduct = true;
     }
   }
-  console.log(cart);
   //Si no existe lo agrego al carrito
   if (!existProduct) {
     newProduct._quantity = newProduct._quantity + 1;
@@ -142,6 +168,7 @@ function buy(e) {
   }
   //Muestro la tabla del carrito
   showCart(cart);
+  validateButtonsState(cart);
 }
 
 function showCart(cart) {
@@ -156,6 +183,10 @@ function showCart(cart) {
     //Agrego precio total de producto al total de compra
     totalPrice += product.price * product.quantity;
     i++;
+  }
+  //Si no hay nada en el carrito pongo fila vacia
+  if(body.textContent == "") {
+    addEmptyRow();
   }
   //Muestro la fila del total
   let totalRow = showTotalRow(totalPrice);
@@ -217,7 +248,122 @@ function showTotalRow(totalPrice) {
   return totalRow;
 }
 
-function clear() {
+function clear(e) {
+  e.preventDefault();
   location.reload();
   localStorage.clear();
+}
+
+function showForm(e) {
+  e.preventDefault();
+  let registerForm = document.getElementById("register-form");
+  registerForm.innerHTML = `
+  <h3 id="ship-data-title">Datos de Envío</h3><br/>
+  <div class="form-row">
+    <div class="col-md-6 mb-3">
+      <label for="validationCustom01">Nombre</label>
+      <input type="text" class="form-control" id="form-name" required>
+      <div class="valid-feedback">
+        Se ve bien!
+      </div>
+      <div class="invalid-feedback">
+        Ingrese su nombre, por favor.
+      </div>
+    </div>
+    <div class="col-md-6 mb-3">
+      <label for="validationCustom02">Apellido</label>
+      <input type="text" class="form-control" id="form-lastname" required>
+      <div class="valid-feedback">
+        Se ve bien!
+      </div>
+      <div class="invalid-feedback">
+        Ingrese su apellido, por favor.
+      </div>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="col-md-6 mb-3">
+      <label for="validationCustom01">Calle</label>
+      <input type="text" class="form-control" id="form-street" required>
+      <div class="valid-feedback">
+        Se ve bien!
+      </div>
+      <div class="invalid-feedback">
+        Ingrese su calle, por favor.
+      </div>
+    </div>
+    <div class="col-md-2 mb-3">
+      <label for="validationCustom02">Altura</label>
+      <input type="number" class="form-control" id="form-street-number" required>
+      <div class="valid-feedback">
+        Se ve bien!
+      </div>
+      <div class="invalid-feedback">
+        Ingrese la altura de su calle, por favor.
+      </div>
+    </div>
+    <div class="col-md-2 mb-3">
+      <label for="validationCustom02">Piso</label>
+      <input type="number" class="form-control" id="form-floor">
+    </div>
+    <div class="col-md-2 mb-3">
+      <label for="validationCustom02">Dpto</label>
+      <input type="number" class="form-control" id="form-department">
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="col-md-6 mb-3">
+      <label for="validationCustom03">Ciudad</label>
+      <input type="text" class="form-control" id="form-city" required>
+      <div class="invalid-feedback">
+        Ingrese su ciudad, por favor.
+      </div>
+      <div class="valid-feedback">
+        Se ve bien!
+      </div>
+    </div>
+    <div class="col-md-4 mb-3">
+      <label for="validationCustom04">Provincia</label>
+      <select class="custom-select" id="form-province" required>
+        <option selected disabled value="">Choose...</option>
+        <option>...</option>
+      </select>
+      <div class="invalid-feedback">
+        Seleccione una provincia, por favor.
+      </div>
+      <div class="valid-feedback">
+        Se ve bien!
+      </div>
+    </div>
+    <div class="col-md-2 mb-3">
+      <label for="validationCustom05">Codigo Zip</label>
+      <input type="text" class="form-control" id="form-zip" required>
+      <div class="invalid-feedback">
+        Ingrese un zip valido, por favor.
+      </div>
+      <div class="valid-feedback">
+        Se ve bien!
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" value="" id="form-terms" required>
+      <label class="form-check-label" for="invalidCheck">
+        Acepto los terminos y condiciones.
+      </label>
+    </div>
+  </div>
+  <button id="confirm-purchase-button" class="btn btn-primary" type="submit">Realizar compra</button>`;
+
+  registerForm.addEventListener("submit", function (e) {
+    if (registerForm.checkValidity() === false) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    registerForm.classList.add("was-validated");
+  });
+
+  let confirmButton = document.getElementById("confirm-button");
+  confirmButton.href = "#ship-data-title";
 }

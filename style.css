@@ -117,7 +117,7 @@ table {
 /*carrrito*/
 #cart-table {
   margin: 0 2%;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   max-width: 96%;
 }
 
@@ -151,4 +151,26 @@ table {
   padding: 5px 20px !important;
   font-size: 1rem !important;
   font-weight: 500 !important;
+  /*margin-bottom: 30px;*/
+}
+
+#buttons-container {
+  height: fit-content;
+  display: block;
+}
+
+/*formulario*/
+#register-form {
+  margin: 0 8%;
+  overflow: hidden;
+  font-size: 1.2rem;
+}
+
+.clear {
+  overflow: auto;
+}
+
+#confirm-purchase-button {
+  background-color: #ba68c8 !important;
+  float: right;
 }
