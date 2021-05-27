@@ -123,6 +123,9 @@ function setEventListeners() {
   //Agrego event listener a boton confirmar
   let confirmButton = document.getElementById("confirm-button");
   confirmButton.addEventListener("click", showForm);
+  //Agrego event listener a boton del toast
+  //let toastButton = document.getElementById("toast-button");
+  //toastButton.addEventListener("click",);
 }
 
 function validateButtonsState(cart) {
@@ -166,9 +169,20 @@ function buy(e) {
     newProduct._quantity = newProduct._quantity + 1;
     cart.push(newProduct);
   }
+  //Mustro el toast
+  showToast();
   //Muestro la tabla del carrito
   showCart(cart);
   validateButtonsState(cart);
+}
+
+function showToast() {
+  let toast = document.getElementById("toast-div");
+  toast.className = "show";
+  // After 3 seconds, remove the show class from DIV
+  setTimeout(function () {
+    toast.className = toast.className.replace("show", "");
+  }, 3000);
 }
 
 function showCart(cart) {
@@ -185,7 +199,7 @@ function showCart(cart) {
     i++;
   }
   //Si no hay nada en el carrito pongo fila vacia
-  if(body.textContent == "") {
+  if (body.textContent == "") {
     addEmptyRow();
   }
   //Muestro la fila del total
