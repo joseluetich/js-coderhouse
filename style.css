@@ -151,7 +151,6 @@ table {
   padding: 5px 20px !important;
   font-size: 1rem !important;
   font-weight: 500 !important;
-  /*margin-bottom: 30px;*/
 }
 
 #buttons-container {
@@ -173,6 +172,7 @@ table {
 #confirm-purchase-button {
   background-color: #ba68c8 !important;
   float: right;
+  margin-top: 10px;
 }
 
 /*toast*/
@@ -249,4 +249,36 @@ table {
     bottom: 0;
     opacity: 0;
   }
+}
+
+/*modal*/
+.modal-header {
+  background-color: #343a40;
+  color: white
+}
+
+.modal-header button{
+  color: white
+}
+
+#confirm-purchase-button {
+  margin: 0;
+  margin-left: 2%;
+}
+
+#success-text {
+  display: table;
+  margin: 30px auto;
+  font-weight: 400;
+}
+
+#success-image {
+  width: 20rem;
+  display: block;
+  margin: auto;
+}
+
+#success-message {
+  display: table;
+  margin: 30px auto;
 }

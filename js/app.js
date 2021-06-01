@@ -113,19 +113,11 @@ function orderTable(tableBody, content, size) {
 
 function setEventListeners() {
   //Agrego event listener a los botones comprar
-  let buttons = document.getElementsByClassName("buy-button");
-  for (let btn of buttons) {
-    btn.addEventListener("click", buy);
-  }
+  $(".buy-button").click(buy);
   //Agrego event listener a boton cancelar
-  let cancelButton = document.getElementById("cancel-button");
-  cancelButton.addEventListener("click", clear);
+  $("#cancel-button").click(clear);
   //Agrego event listener a boton confirmar
-  let confirmButton = document.getElementById("confirm-button");
-  confirmButton.addEventListener("click", showForm);
-  //Agrego event listener a boton del toast
-  //let toastButton = document.getElementById("toast-button");
-  //toastButton.addEventListener("click",);
+  $("#confirm-button").click(showForm);
 }
 
 function validateButtonsState(cart) {
@@ -235,7 +227,18 @@ function createCartRow(i, product) {
   col4.textContent = `$ ${product.price * product.quantity}`;
   col4.className = "center";
   row.appendChild(col4);
+  //Columna 5: Eliminar
+  const col5 = document.createElement("td");
+  col5.innerHTML = `<img id="${i}" src="/images/delete.svg"/>`;
+  col5.className = "center";
+  col5.addEventListener("click", deleteProduct);
+  row.appendChild(col5);
   return row;
+}
+
+function deleteProduct(e) {
+  cart.splice(e.target.id - 1, 1);
+  showCart(cart);
 }
 
 function showTotalRow(totalPrice) {
@@ -259,6 +262,8 @@ function showTotalRow(totalPrice) {
   col4.textContent = `$ ${totalPrice}`;
   col4.className = "center";
   totalRow.appendChild(col4);
+  const col5 = document.createElement("td");
+  totalRow.appendChild(col5);
   return totalRow;
 }
 
@@ -270,114 +275,143 @@ function clear(e) {
 
 function showForm(e) {
   e.preventDefault();
+  //Muestro popup con el formulario
   let registerForm = document.getElementById("register-form");
   registerForm.innerHTML = `
-  <h3 id="ship-data-title">Datos de Envío</h3><br/>
-  <div class="form-row">
-    <div class="col-md-6 mb-3">
-      <label for="validationCustom01">Nombre</label>
-      <input type="text" class="form-control" id="form-name" required>
-      <div class="valid-feedback">
-        Se ve bien!
+  <div class="modal fade bd-example-modal-lg" id="formModal" tabindex="-1" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Datos de Envío</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+          <div class="form-row">
+          <div class="col-md-6 mb-3">
+            <label for="validationCustom01">Nombre</label>
+            <input type="text" class="form-control" id="form-name" required>
+            <div class="valid-feedback">
+              Se ve bien!
+            </div>
+            <div class="invalid-feedback">
+              Ingrese su nombre, por favor.
+            </div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="validationCustom02">Apellido</label>
+            <input type="text" class="form-control" id="form-lastname" required>
+            <div class="valid-feedback">
+              Se ve bien!
+            </div>
+            <div class="invalid-feedback">
+              Ingrese su apellido, por favor.
+            </div>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="col-md-6 mb-3">
+            <label for="validationCustom01">Calle</label>
+            <input type="text" class="form-control" id="form-street" required>
+            <div class="valid-feedback">
+              Se ve bien!
+            </div>
+            <div class="invalid-feedback">
+              Ingrese su calle, por favor.
+            </div>
+          </div>
+          <div class="col-md-2 mb-3">
+            <label for="validationCustom02">Altura</label>
+            <input type="number" class="form-control" id="form-street-number" required>
+            <div class="valid-feedback">
+              Se ve bien!
+            </div>
+            <div class="invalid-feedback">
+              Ingrese la altura de su calle, por favor.
+            </div>
+          </div>
+          <div class="col-md-2 mb-3">
+            <label for="validationCustom02">Piso</label>
+            <input type="number" class="form-control" id="form-floor">
+          </div>
+          <div class="col-md-2 mb-3">
+            <label for="validationCustom02">Dpto</label>
+            <input type="number" class="form-control" id="form-department">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="col-md-6 mb-3">
+            <label for="validationCustom03">Ciudad</label>
+            <input type="text" class="form-control" id="form-city" required>
+            <div class="invalid-feedback">
+              Ingrese su ciudad, por favor.
+            </div>
+            <div class="valid-feedback">
+              Se ve bien!
+            </div>
+          </div>
+          <div class="col-md-4 mb-3">
+            <label for="validationCustom04">Provincia</label>
+            <select class="custom-select" id="form-province" required>
+              <option selected disabled value="">Choose...</option>
+              <option>...</option>
+            </select>
+            <div class="invalid-feedback">
+              Seleccione una provincia, por favor.
+            </div>
+            <div class="valid-feedback">
+              Se ve bien!
+            </div>
+          </div>
+          <div class="col-md-2 mb-3">
+            <label for="validationCustom05">Codigo Zip</label>
+            <input type="text" class="form-control" id="form-zip" required>
+            <div class="invalid-feedback">
+              Ingrese un zip valido, por favor.
+            </div>
+            <div class="valid-feedback">
+              Se ve bien!
+            </div>
+          </div>
+        </div>
+          </div>
+          <div class="modal-footer">
+            <button id="cancel-purchase-button" type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            <button id="confirm-purchase-button" type="submit" class="btn btn-primary">Realizar compra</button>
+          </div>
+        </div>
       </div>
-      <div class="invalid-feedback">
-        Ingrese su nombre, por favor.
-      </div>
-    </div>
-    <div class="col-md-6 mb-3">
-      <label for="validationCustom02">Apellido</label>
-      <input type="text" class="form-control" id="form-lastname" required>
-      <div class="valid-feedback">
-        Se ve bien!
-      </div>
-      <div class="invalid-feedback">
-        Ingrese su apellido, por favor.
-      </div>
-    </div>
-  </div>
-  <div class="form-row">
-    <div class="col-md-6 mb-3">
-      <label for="validationCustom01">Calle</label>
-      <input type="text" class="form-control" id="form-street" required>
-      <div class="valid-feedback">
-        Se ve bien!
-      </div>
-      <div class="invalid-feedback">
-        Ingrese su calle, por favor.
-      </div>
-    </div>
-    <div class="col-md-2 mb-3">
-      <label for="validationCustom02">Altura</label>
-      <input type="number" class="form-control" id="form-street-number" required>
-      <div class="valid-feedback">
-        Se ve bien!
-      </div>
-      <div class="invalid-feedback">
-        Ingrese la altura de su calle, por favor.
-      </div>
-    </div>
-    <div class="col-md-2 mb-3">
-      <label for="validationCustom02">Piso</label>
-      <input type="number" class="form-control" id="form-floor">
-    </div>
-    <div class="col-md-2 mb-3">
-      <label for="validationCustom02">Dpto</label>
-      <input type="number" class="form-control" id="form-department">
-    </div>
-  </div>
-  <div class="form-row">
-    <div class="col-md-6 mb-3">
-      <label for="validationCustom03">Ciudad</label>
-      <input type="text" class="form-control" id="form-city" required>
-      <div class="invalid-feedback">
-        Ingrese su ciudad, por favor.
-      </div>
-      <div class="valid-feedback">
-        Se ve bien!
-      </div>
-    </div>
-    <div class="col-md-4 mb-3">
-      <label for="validationCustom04">Provincia</label>
-      <select class="custom-select" id="form-province" required>
-        <option selected disabled value="">Choose...</option>
-        <option>...</option>
-      </select>
-      <div class="invalid-feedback">
-        Seleccione una provincia, por favor.
-      </div>
-      <div class="valid-feedback">
-        Se ve bien!
-      </div>
-    </div>
-    <div class="col-md-2 mb-3">
-      <label for="validationCustom05">Codigo Zip</label>
-      <input type="text" class="form-control" id="form-zip" required>
-      <div class="invalid-feedback">
-        Ingrese un zip valido, por favor.
-      </div>
-      <div class="valid-feedback">
-        Se ve bien!
-      </div>
-    </div>
-  </div>
-  <div class="form-group">
-    <div class="form-check">
-      <input class="form-check-input" type="checkbox" value="" id="form-terms" required>
-      <label class="form-check-label" for="invalidCheck">
-        Acepto los terminos y condiciones.
-      </label>
-    </div>
-  </div>
-  <button id="confirm-purchase-button" class="btn btn-primary" type="submit">Realizar compra</button>`;
+    </div>`;
 
   registerForm.addEventListener("submit", function (e) {
+    //Valido la informacion ingresada
     if (registerForm.checkValidity() === false) {
       e.preventDefault();
       e.stopPropagation();
+    } else {
+      formModal.innerHTML = `
+      <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-body" id="modal-content">
+            <button id="close-button" type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <h3 id="success-message">Compra realizada con exito!</h3>
+            <img id="success-image" src="/images/success.svg" />
+            <h3 id="success-text">Gracias por confiar en Zeppelin</h3>
+          </div>
+        </div>
+      </div>`;
+      localStorage.clear();
+      //Cuando cierro el popup, se refresca la pagina y se limpia el carrito
+      $("#close-button").click(function (e) {
+        e.preventDefault();
+        $("html, body").animate({ scrollTop: 0 }, "slow");
+        cart = [];
+        showCart(cart);
+      });
     }
     registerForm.classList.add("was-validated");
   });
-
-  let confirmButton = document.getElementById("confirm-button");
-  confirmButton.href = "#ship-data-title";
 }

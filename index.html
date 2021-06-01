@@ -96,7 +96,9 @@
       </div>
       <div class="toast-body">
         <p>Producto agregado al carrito!</p>
-        <a id="toast-button" class="btn btn-primary" href="#cart">Ir al carrito</a>
+        <a id="toast-button" class="btn btn-primary" href="#cart"
+          >Ir al carrito</a
+        >
       </div>
     </div>
 
@@ -161,6 +163,7 @@
               <th scope="col" class="center">Producto</th>
               <th scope="col" class="center">Precio Unitario</th>
               <th scope="col" class="center">Precio Total</th>
+              <th scope="col" class="center"></th>
             </tr>
           </thead>
           <tbody id="cart-body">
@@ -177,6 +180,8 @@
             id="confirm-button"
             type="button"
             class="btn btn-primary btn-confirm"
+            data-toggle="modal"
+            data-target="#formModal"
           >
             Confirmar
           </button>
