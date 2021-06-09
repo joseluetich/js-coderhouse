@@ -1,9 +1,5 @@
-let dataCart = [];
-//Obtengo los productos del localstorage
-dataCart = JSON.parse(localStorage.getItem("cart"));
-let cart = [];
-
 function getStorageData() {
+  dataCart = JSON.parse(localStorage.getItem("cart"));
   if (dataCart) {
     for (const prod of dataCart) {
       /*Como en el constructor this.quantity = 0, hay que guardar
@@ -14,7 +10,6 @@ function getStorageData() {
       cart.push(newProduct);
     }
   }
-  validateButtonsState(dataCart);
   showCart(cart);
 }
 
@@ -48,7 +43,6 @@ function setContactText() {
 
 function createTable(data, type) {
   let tableBody = document.createElement("tbody");
-
   //Creo un componente para cada producto de la categoria "type"
   let content = [];
   for (let product of data) {
@@ -81,7 +75,6 @@ function createTable(data, type) {
   else {
     orderTable(tableBody, content, 4);
   }
-
   $(`#table-${type}`).append(tableBody);
 }
 
@@ -100,10 +93,7 @@ function orderTable(tableBody, content, size) {
     /*Pruebo:
         - Si ya hay cuatro elementos en la lista
         - Para los ultimos elementos el contador no va a ser 4, por eso veo si el contador es igual al modulo de 4*/
-    if (
-      count == size ||
-      (content.length - i < size && count == content.length % size)
-    ) {
+    if (count == size || (content.length - i < size && count == content.length % size)) {
       //Asocio al body cada fila
       tableBody.appendChild(row);
       count = 0;
@@ -118,29 +108,6 @@ function setEventListeners() {
   $("#cancel-button").click(clear);
   //Agrego event listener a boton confirmar
   $("#confirm-button").click(showForm);
-}
-
-function validateButtonsState(cart) {
-  let confirmButton = document.getElementById("confirm-button");
-  let cancelButton = document.getElementById("cancel-button");
-  if (cart == null || cart.length == 0) {
-    confirmButton.disabled = true;
-    cancelButton.disabled = true;
-    //Si no hay nada en el carrito pongo fila vacia
-    addEmptyRow();
-  } else {
-    confirmButton.disabled = false;
-    cancelButton.disabled = false;
-  }
-}
-
-function addEmptyRow() {
-  $("#cart-body").prepend(`<tr>
-  <td class="center">-</td>
-  <td class="center">-</td>
-  <td class="center">-</td>
-  <td class="center">-</td>
-</tr>`);
 }
 
 function buy(e) {
@@ -165,13 +132,12 @@ function buy(e) {
   showToast();
   //Muestro la tabla del carrito
   showCart(cart);
-  validateButtonsState(cart);
 }
 
 function showToast() {
   let toast = document.getElementById("toast-div");
   toast.className = "show";
-  // After 3 seconds, remove the show class from DIV
+  //Muestro el toast durante 3 segundos
   setTimeout(function () {
     toast.className = toast.className.replace("show", "");
   }, 3000);
@@ -179,20 +145,21 @@ function showToast() {
 
 function showCart(cart) {
   //Creo el cuerpo de la tabla
-  let totalPrice = 0;
+  let totalPrice = 0, i = 1;
   let body = document.getElementById("cart-body");
   body.textContent = "";
-  let i = 1;
-  for (let product of cart) {
-    let row = createCartRow(i, product);
-    body.appendChild(row);
-    //Agrego precio total de producto al total de compra
-    totalPrice += product.price * product.quantity;
-    i++;
-  }
-  //Si no hay nada en el carrito pongo fila vacia
-  if (body.textContent == "") {
-    addEmptyRow();
+  
+  //Valido si los botones deben deshabilitarse o no
+  validateButtonsState(cart);
+
+  if (cart != null) {
+    for (let product of cart) {
+      let row = createCartRow(i, product);
+      body.appendChild(row);
+      //Agrego precio total de producto al total de compra
+      totalPrice += product.price * product.quantity;
+      i++;
+    }
   }
   //Muestro la fila del total
   let totalRow = showTotalRow(totalPrice);
@@ -201,6 +168,29 @@ function showCart(cart) {
   localStorage.clear();
   //Almaceno en el localstorage
   localStorage.setItem("cart", JSON.stringify(cart));
+}
+
+function validateButtonsState(cart) {
+  let confirmButton = document.getElementById("confirm-button");
+  let cancelButton = document.getElementById("cancel-button");
+  if (cart == null || cart.length === 0) {
+    confirmButton.disabled = true;
+    cancelButton.disabled = true;
+    //Si no hay nada en el carrito pongo fila vacia
+    addEmptyRow();
+  } else {
+    confirmButton.disabled = false;
+    cancelButton.disabled = false;
+  }
+}
+
+function addEmptyRow() {
+  $("#cart-body").prepend(`<tr>
+  <td class="center">-</td>
+  <td class="center">-</td>
+  <td class="center">-</td>
+  <td class="center">-</td>
+</tr>`);
 }
 
 function createCartRow(i, product) {
@@ -237,8 +227,13 @@ function createCartRow(i, product) {
 }
 
 function deleteProduct(e) {
+  //Hago referencia a la fila a eliminar
+  $(e.target).parent().parent().fadeOut(1500);
   cart.splice(e.target.id - 1, 1);
-  showCart(cart);
+  //Espero a que se relice la animacion
+  setTimeout(function () {
+    showCart(cart);
+  }, 1400);
 }
 
 function showTotalRow(totalPrice) {
@@ -269,8 +264,9 @@ function showTotalRow(totalPrice) {
 
 function clear(e) {
   e.preventDefault();
-  location.reload();
   localStorage.clear();
+  cart = [];
+  showCart(cart);
 }
 
 function showForm(e) {
@@ -354,8 +350,10 @@ function showForm(e) {
           <div class="col-md-4 mb-3">
             <label for="validationCustom04">Provincia</label>
             <select class="custom-select" id="form-province" required>
-              <option selected disabled value="">Choose...</option>
-              <option>...</option>
+              <option selected disabled value="">Seleccione</option>
+              <option>Buenos Aires</option>
+              <option>Cordoba</option>
+              <option>Santa Fe</option>
             </select>
             <div class="invalid-feedback">
               Seleccione una provincia, por favor.
@@ -365,8 +363,8 @@ function showForm(e) {
             </div>
           </div>
           <div class="col-md-2 mb-3">
-            <label for="validationCustom05">Codigo Zip</label>
-            <input type="text" class="form-control" id="form-zip" required>
+            <label for="validationCustom05">Zip</label>
+            <input type="number" class="form-control" id="form-zip" required>
             <div class="invalid-feedback">
               Ingrese un zip valido, por favor.
             </div>
@@ -390,7 +388,43 @@ function showForm(e) {
       e.preventDefault();
       e.stopPropagation();
     } else {
-      formModal.innerHTML = `
+      //Realizo un post con la informacion ingresada
+      postInformation();
+    }
+    registerForm.classList.add("was-validated");
+  });
+}
+
+function postInformation() {
+  //Obtengo los valores ingresados
+  let shippingData = {
+    name: document.getElementById("form-name").value,
+    lastName: document.getElementById("form-lastname").value,
+    street: document.getElementById("form-street").value,
+    streetNumber: document.getElementById("form-street-number").value,
+    floor: document.getElementById("form-floor").value,
+    department: document.getElementById("form-department").value,
+    city: document.getElementById("form-city").value,
+    province: document.getElementById("form-province").value,
+    zip: document.getElementById("form-zip").value
+  }
+  //Realizo el post
+  $.post(
+    "https://jsonplaceholder.typicode.com/posts",
+    JSON.stringify(shippingData),
+    function (data, status) {
+      //Si la peticion se cumple
+      if (status === "success") {
+        //Muestro modal de compra exitosa
+        showSuccessModal();
+      }
+    }
+  );
+}
+
+function showSuccessModal() {
+  $("#formModal").empty();
+  $("#formModal").prepend(`
       <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
           <div class="modal-body" id="modal-content">
@@ -402,16 +436,13 @@ function showForm(e) {
             <h3 id="success-text">Gracias por confiar en Zeppelin</h3>
           </div>
         </div>
-      </div>`;
-      localStorage.clear();
-      //Cuando cierro el popup, se refresca la pagina y se limpia el carrito
-      $("#close-button").click(function (e) {
-        e.preventDefault();
-        $("html, body").animate({ scrollTop: 0 }, "slow");
-        cart = [];
-        showCart(cart);
-      });
-    }
-    registerForm.classList.add("was-validated");
+      </div>`);
+  localStorage.clear();
+  //Cuando cierro el popup, se refresca la pagina y se limpia el carrito
+  $("#close-button").click(function (e) {
+    e.preventDefault();
+    $("html, body").animate({ scrollTop: 0 }, 4000);
+    cart = [];
+    showCart(cart);
   });
 }
