@@ -93,7 +93,10 @@ function orderTable(tableBody, content, size) {
     /*Pruebo:
         - Si ya hay cuatro elementos en la lista
         - Para los ultimos elementos el contador no va a ser 4, por eso veo si el contador es igual al modulo de 4*/
-    if (count == size || (content.length - i < size && count == content.length % size)) {
+    if (
+      count == size ||
+      (content.length - i < size && count == content.length % size)
+    ) {
       //Asocio al body cada fila
       tableBody.appendChild(row);
       count = 0;
@@ -145,10 +148,11 @@ function showToast() {
 
 function showCart(cart) {
   //Creo el cuerpo de la tabla
-  let totalPrice = 0, i = 1;
+  let totalPrice = 0,
+    i = 1;
   let body = document.getElementById("cart-body");
   body.textContent = "";
-  
+
   //Valido si los botones deben deshabilitarse o no
   validateButtonsState(cart);
 
@@ -286,8 +290,8 @@ function showForm(e) {
           <div class="modal-body">
           <div class="form-row">
           <div class="col-md-6 mb-3">
-            <label for="validationCustom01">Nombre</label>
-            <input type="text" class="form-control" id="form-name" required>
+            <label for="form-name">Nombre</label>
+            <input id="form-name" type="text" class="form-control" required>
             <div class="valid-feedback">
               Se ve bien!
             </div>
@@ -296,8 +300,8 @@ function showForm(e) {
             </div>
           </div>
           <div class="col-md-6 mb-3">
-            <label for="validationCustom02">Apellido</label>
-            <input type="text" class="form-control" id="form-lastname" required>
+            <label for="form-lastname">Apellido</label>
+            <input id="form-lastname" type="text" class="form-control" required>
             <div class="valid-feedback">
               Se ve bien!
             </div>
@@ -308,8 +312,8 @@ function showForm(e) {
         </div>
         <div class="form-row">
           <div class="col-md-6 mb-3">
-            <label for="validationCustom01">Calle</label>
-            <input type="text" class="form-control" id="form-street" required>
+            <label for="form-street">Calle</label>
+            <input id="form-street" type="text" class="form-control" required>
             <div class="valid-feedback">
               Se ve bien!
             </div>
@@ -318,8 +322,8 @@ function showForm(e) {
             </div>
           </div>
           <div class="col-md-2 mb-3">
-            <label for="validationCustom02">Altura</label>
-            <input type="number" class="form-control" id="form-street-number" required>
+            <label for="form-street-number">Altura</label>
+            <input id="form-street-number" type="number" class="form-control" required>
             <div class="valid-feedback">
               Se ve bien!
             </div>
@@ -328,18 +332,18 @@ function showForm(e) {
             </div>
           </div>
           <div class="col-md-2 mb-3">
-            <label for="validationCustom02">Piso</label>
-            <input type="number" class="form-control" id="form-floor">
+            <label for="form-floor">Piso</label>
+            <input id="form-floor" type="number" class="form-control">
           </div>
           <div class="col-md-2 mb-3">
-            <label for="validationCustom02">Dpto</label>
-            <input type="number" class="form-control" id="form-department">
+            <label for="form-department">Dpto</label>
+            <input id="form-department" type="number" class="form-control">
           </div>
         </div>
         <div class="form-row">
           <div class="col-md-6 mb-3">
-            <label for="validationCustom03">Ciudad</label>
-            <input type="text" class="form-control" id="form-city" required>
+            <label for="form-city">Ciudad</label>
+            <input id="form-city" type="text" class="form-control" required>
             <div class="invalid-feedback">
               Ingrese su ciudad, por favor.
             </div>
@@ -348,12 +352,9 @@ function showForm(e) {
             </div>
           </div>
           <div class="col-md-4 mb-3">
-            <label for="validationCustom04">Provincia</label>
-            <select class="custom-select" id="form-province" required>
+            <label for="form-province">Provincia</label>
+            <select id="form-province" class="custom-select" required>
               <option selected disabled value="">Seleccione</option>
-              <option>Buenos Aires</option>
-              <option>Cordoba</option>
-              <option>Santa Fe</option>
             </select>
             <div class="invalid-feedback">
               Seleccione una provincia, por favor.
@@ -382,6 +383,25 @@ function showForm(e) {
       </div>
     </div>`;
 
+  //Obtengo las provincias
+  const API_PROVINCES = "https://apis.datos.gob.ar/georef/api/provincias";
+  $.get(API_PROVINCES, function (data, state) {
+    //Obtengo los nombres de las provincias
+    let provinces = [];
+    for (const prov of data.provincias) {
+      provinces.push(prov.nombre);
+    }
+    //Las ordeno alfabeticamente
+    let sortProvinces = provinces.sort();
+    //Las agrego al select
+    $("#form-province").empty();
+    for (const prov of sortProvinces) {
+      $("#form-province").append(
+        `<option value="${prov.toLowerCase()}">${prov}</option>`
+      );
+    }
+  });
+
   registerForm.addEventListener("submit", function (e) {
     //Valido la informacion ingresada
     if (registerForm.checkValidity() === false) {
@@ -406,8 +426,8 @@ function postInformation() {
     department: document.getElementById("form-department").value,
     city: document.getElementById("form-city").value,
     province: document.getElementById("form-province").value,
-    zip: document.getElementById("form-zip").value
-  }
+    zip: document.getElementById("form-zip").value,
+  };
   //Realizo el post
   $.post(
     "https://jsonplaceholder.typicode.com/posts",
